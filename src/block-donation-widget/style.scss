@@ -1,0 +1,357 @@
+/**
+ * The following styles get applied both on the front of your site
+ * and in the editor.
+ *
+ * Replace them with your own styles or remove the file completely.
+ */
+
+$sm: 991px;
+
+.p4jp-block-wrapper {
+	.external-link::after {
+		display: none;
+	}
+
+	.aspect-box {
+		position: relative;
+		width: 100%;
+		height: 0;
+		padding-bottom: 49.35%;
+		> img {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			object-position: center center;
+		}
+	}
+
+	&--donation {
+		.fullwidth {
+			margin: 0 calc((100vw - 100%) / 2 * -1);
+			position: absolute;
+			width: 100vw;
+			height: 100%;
+
+			@media (max-width: $sm) {
+				display: none;
+			}
+
+			&__left,
+			&__right {
+				position: absolute;
+				height: 100%;
+				width: 50%;
+				z-index: -1;
+			}
+
+			&__left {
+				left: 0;
+				background-color: rgba(0, 0, 0, 0.15);
+			}
+
+			&__right {
+				right: 0;
+				background-color: #dfebf0;
+			}
+		}
+
+		.content {
+			width: 100%;
+			margin: 0 auto;
+			display: flex;
+			flex-flow: row nowrap;
+
+			@media (max-width: $sm) {
+				flex-flow: column nowrap;
+			}
+
+			&__left,
+			&__right {
+				position: relative;
+				width: 50%;
+				@media (max-width: $sm) {
+					width: 100%;
+				}
+			}
+
+			&__left {
+				padding: 32px 0;
+				@media (max-width: $sm) {
+					padding: 24px;
+				}
+			}
+
+			&__right {
+				padding: 40px 0 40px 40px;
+				@media (max-width: $sm) {
+					padding: 24px;
+					background-color: #dfebf0;
+				}
+			}
+
+			.wrapper--keyvisual {
+				position: absolute;
+				top: 0;
+				left: -80px;
+				z-index: -1;
+				width: calc(100% + 80px);
+				height: 100%;
+				@media (max-width: $sm) {
+					left: 0;
+					width: 100%;
+				}
+			}
+
+			.keyvisual {
+				max-width: none;
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				object-position: center center;
+				mask-image: linear-gradient(
+					90deg,
+					transparent 5%,
+					rgba(0, 0, 0, 1) 20%
+				);
+				@media (max-width: $sm) {
+					mask-image: none;
+				}
+			}
+
+			.wrapper--title {
+				background-color: #fff;
+				padding: 16px;
+				max-width: 224px;
+				color: #f26b34;
+				font-weight: bold;
+				font-size: 30px;
+				margin-right: auto;
+				margin-bottom: 32px;
+
+				.title {
+					margin: 0;
+				}
+
+				@media (max-width: $sm) {
+					max-width: 177px;
+				}
+			}
+
+			.wrapper--description {
+				color: #fff;
+				max-width: 360px;
+				font-weight: bold;
+				font-size: 20px;
+				margin-right: auto;
+
+				> p {
+					margin: 0;
+					+ p {
+						margin-top: 1rem;
+						margin-bottom: 0;
+					}
+				}
+
+				@media (max-width: $sm) {
+					font-size: 13px;
+				}
+			}
+
+			.tabs {
+				display: flex;
+				flex-flow: column nowrap;
+				height: 100%;
+
+				.wrapper--tabs-label {
+					display: grid;
+					grid-template-columns: repeat(3, 3fr);
+					grid-column-gap: 4px;
+				}
+
+				&__label {
+					&:focus {
+						outline: none;
+						border-radius: 0;
+					}
+
+					background-color: #acd0e3;
+					color: #074365;
+					padding: 12px 16px;
+					font-weight: bold;
+					font-size: 18px;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					text-align: center;
+
+					&--active {
+						background-color: #fff;
+					}
+
+					@media (max-width: $sm) {
+						font-size: 13px;
+					}
+				}
+
+				.wrapper--tabs-panel {
+					position: relative;
+					flex-grow: 1;
+				}
+
+				&__panel {
+					position: relative;
+					width: 100%;
+					min-height: 100%;
+					background-color: #fff;
+					color: #000;
+					padding: 32px;
+					flex-flow: column nowrap;
+					align-items: center;
+					display: none;
+
+					&--active {
+						display: flex;
+					}
+				}
+
+				&__content {
+					width: 100%;
+					font-weight: bold;
+					font-size: 20px;
+					flex-grow: 1;
+					margin-bottom: 24px;
+
+					@media (max-width: $sm) {
+						font-size: 13px;
+					}
+				}
+
+				&__btn {
+					background-color: #f26b34;
+					color: #fff;
+					font-weight: bold;
+					border: none;
+					border-radius: 5px;
+					padding: 12px 64px;
+
+					@media (max-width: $sm) {
+						font-size: 14px;
+						padding: 12px 16px;
+					}
+				}
+			}
+		}
+	}
+
+	&--about {
+		.content {
+			background-color: #dfebf0;
+
+			&__top,
+			&__bottom {
+				display: flex;
+				flex-flow: row nowrap;
+
+				@media (max-width: $sm) {
+					flex-flow: column nowrap;
+				}
+			}
+
+			&__top {
+				align-items: center;
+			}
+
+			&__bottom {
+				align-items: flex-start;
+
+				@media (max-width: $sm) {
+					align-items: center;
+				}
+			}
+		}
+
+		.wrapper--title {
+			background-color: #fff;
+			padding: 16px;
+			max-width: 361px;
+			color: #074365;
+			font-weight: bold;
+			font-size: 30px;
+			position: relative;
+			left: 40px;
+			z-index: 1;
+
+			.title {
+				margin: 0;
+			}
+
+			@media (max-width: $sm) {
+				left: 0;
+				top: 32px;
+				font-size: 24px;
+			}
+		}
+
+		.wrapper--keyvisual {
+			width: 70%;
+
+			@media (max-width: $sm) {
+				width: 100%;
+
+				.aspect-box {
+					padding-bottom: 63.08%;
+				}
+			}
+		}
+
+		.wrapper--description {
+			color: #074365;
+			padding: 40px;
+			font-size: 20px;
+			font-weight: bold;
+
+			> p {
+				margin: 0;
+				+ p {
+					margin-top: 1rem;
+					margin-bottom: 0;
+				}
+			}
+
+			@media (max-width: $sm) {
+				padding: 24px;
+				font-size: 13px;
+			}
+		}
+
+		.cta {
+			padding: 40px 80px 40px 40px;
+			> * + * {
+				margin-top: 20px;
+			}
+
+			@media (max-width: $sm) {
+				padding: 32px 24px;
+			}
+		}
+
+		.cta-btn__btn {
+			background-color: #074365;
+			color: #fff;
+			border: none;
+			border-radius: 5px;
+			padding: 12px 16px;
+			min-width: 267px;
+			font-weight: bold;
+			text-align: left;
+
+			@media (max-width: $sm) {
+				min-width: 206px;
+				font-size: 14px;
+			}
+		}
+	}
+}

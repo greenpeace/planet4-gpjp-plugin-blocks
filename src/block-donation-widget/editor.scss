@@ -1,0 +1,118 @@
+/**
+ * The following styles get applied inside the editor only.
+ *
+ * Replace them with your own styles or remove the file completely.
+ */
+
+.p4-jp-block-wrapper {
+	font-family: system-ui;
+	font-size: 14px;
+	border: 1px dotted #ddd;
+	padding: 8px;
+	display: grid;
+	grid-template-columns: max-content auto;
+	grid-row-gap: 8px;
+
+	> * {
+		display: flex;
+		align-items: center;
+		padding-bottom: 8px;
+		border-bottom: 1px dotted #ddd;
+		&:nth-of-type(odd) {
+			padding-right: 8px;
+		}
+		&:nth-last-of-type(2),
+		&:last-of-type {
+			border: none;
+		}
+	}
+
+	input, textarea, select, button {
+		border: 1px solid #ddd;
+		border-radius: 2px;
+
+		&:focus {
+			border: 1px solid var(--wp-admin-theme-color);
+			box-shadow: 0 0 0 1px var(--wp-admin-theme-color);
+			transition: box-shadow 0s;
+		}
+	}
+
+	textarea {
+		min-height: 64px;
+		width: 100%;
+		max-width: 480px;
+		padding: 4px 8px;
+	}
+
+	.components-base-control {
+		width: 100%;
+		max-width: 300px;
+
+		&__field {
+			margin-bottom: 0;
+		}
+	}
+
+	.components-text-control__input {
+		border: 1px solid #ddd;
+	}
+
+	.block-editor-url-input {
+		padding: 0;
+
+		> .components-base-control__field {
+			display: inline-flex;
+			align-items: center;
+			position: relative;
+
+			.components-spinner {
+				left: calc(100% + 4px);
+			}
+		}
+
+		input[type='text'] {
+			border: 1px solid #ddd;
+			border-radius: 2px;
+			height: 30px;
+			padding: 0 8px;
+
+			&:focus {
+			border: 1px solid var(--wp-admin-theme-color);
+				transition: none;
+			}
+		}
+	}
+
+	.components-popover.is-from-top {
+		margin-top: 4px;
+	}
+
+	.components-popover.is-from-bottom {
+		margin-top: -4px;
+	}
+
+	.tab-settings, .btn-settings {
+		display: grid;
+		grid-template-columns: max-content auto;
+		grid-row-gap: 4px;
+		grid-column-gap: 4px;
+
+		> * {
+			display: flex;
+			align-items: center;
+		}
+	}
+
+	.image-settings {
+		button {
+			margin-right: 8px;
+		}
+
+		img {
+			max-width: 320px;
+			width: 100%;
+		}
+	}
+
+}

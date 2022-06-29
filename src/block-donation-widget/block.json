@@ -1,0 +1,137 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "planet4-japan/block-donation-widget",
+	"version": "0.1.0",
+	"title": "Planet4 Japan Donation Widget",
+	"category": "widgets",
+	"icon": "smiley",
+	"description": "Example static block scaffolded with Create Block tool.",
+	"supports": {
+		"html": false
+	},
+	"textdomain": "planet4-japan-block-donation-widget",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
+	"viewScript": "file:./view.js",
+	"attributes": {
+		"blockType": {
+			"enum": ["donation", "about"],
+			"default": "donation"
+		},
+		"title": {
+			"type": "string",
+			"source": "text",
+			"selector": "h3.title"
+		},
+		"description": {
+			"type": "string",
+			"source": "html",
+			"selector": ".wrapper--description"
+		},
+		"image": {
+			"type": "string",
+			"source": "attribute",
+			"attribute": "src",
+			"selector": "img.keyvisual"
+		},
+		"imageId": {
+			"type": "number"
+		},
+		"tabLabels": {
+			"type": "array",
+			"source": "query",
+			"selector": ".tabs__label",
+			"default": [
+				{
+					"value": ""
+				},
+				{
+					"value": ""
+				},
+				{
+					"value": ""
+				}
+			],
+			"query": {
+				"value": {
+					"type": "string",
+					"source": "text"
+				}
+			}
+		},
+		"tabPanels": {
+			"type": "array",
+			"source": "query",
+			"selector": ".tabs__panel",
+			"default": [
+				{
+					"content": "",
+					"btnText": "",
+					"btnLink": ""
+				},
+				{
+					"content": "",
+					"btnText": "",
+					"btnLink": ""
+				},
+				{
+					"content": "",
+					"btnText": "",
+					"btnLink": ""
+				}
+			],
+			"query": {
+				"content": {
+					"type": "string",
+					"source": "text",
+					"selector": ".tabs__content"
+				},
+				"btnText": {
+					"type": "string",
+					"source": "text",
+					"selector": ".tabs__btn"
+				},
+				"btnLink": {
+					"type": "string",
+					"source": "attribute",
+					"attribute": "href",
+					"selector": "a.tabs__link"
+				}
+			}
+		},
+		"ctaBtns": {
+			"type": "array",
+			"source": "query",
+			"selector": ".cta-btn",
+			"default": [
+				{
+					"btnText": "",
+					"btnLink": ""
+				},
+				{
+					"btnText": "",
+					"btnLink": ""
+				},
+				{
+					"btnText": "",
+					"btnLink": ""
+				}
+			],
+			"query": {
+				"btnText": {
+					"type": "string",
+					"source": "text",
+					"selector": ".cta-btn__btn"
+				},
+				"btnLink": {
+					"type": "string",
+					"source": "attribute",
+					"attribute": "href",
+					"selector": "a.cta-btn__link"
+				}
+			}
+		}
+	}
+}

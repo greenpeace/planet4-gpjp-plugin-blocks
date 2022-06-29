@@ -1,0 +1,12 @@
+{
+    "name": "greenpeace/planet4-gpjp-plugin-blocks",
+    "description": "Wordpress Gutenberg blocks specific to Greenpeace Japan",
+    "type": "wordpress-plugin",
+    "license": "GPL-3.0-or-later",
+    "authors": [
+        {
+            "name": "Hang Wong",
+            "email": "hwong@greenpeace.org"
+        }
+    ]
+}
