@@ -283,6 +283,7 @@ $sm: 991px;
 			position: relative;
 			left: 40px;
 			z-index: 1;
+      flex-grow: 1;
 
 			.title {
 				margin: 0;
@@ -312,6 +313,7 @@ $sm: 991px;
 			padding: 40px;
 			font-size: 20px;
 			font-weight: bold;
+      flex-grow: 1;
 
 			> p {
 				margin: 0;
