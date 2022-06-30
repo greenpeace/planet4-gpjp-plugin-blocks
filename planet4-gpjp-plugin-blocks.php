@@ -33,4 +33,4 @@ function p4_child_theme_gpjp_whitelist_blocks( $allowed_blocks, $post ) {
 	return $allowed;
 }
 
-add_filter('allowed_block_types', 'p4_child_theme_gpjp_whitelist_blocks', 11, 2);
+add_filter('allowed_block_types_all', 'p4_child_theme_gpjp_whitelist_blocks', 11, 2);
