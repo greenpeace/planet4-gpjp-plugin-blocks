@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name:       Planet4 GPJP Plugin Blocks
+ * Plugin Name:       Planet4 - GPJP Plugin Blocks
  * Description:       Contains blocks that are specific to Greenpeace Japan Planet4
  * Requires at least: 5.9
  * Requires PHP:      7.0
@@ -24,4 +24,13 @@ function planet4_gpjp_plugin_blocks() {
 	register_block_type( __DIR__ . '/build/block-donation-widget' );
 	/* register_block_type( __DIR__ . '/build/{{another-plugin}}' ); */
 }
+
 add_action( 'init', 'planet4_gpjp_plugin_blocks' );
+
+function p4_child_theme_gpjp_whitelist_blocks( $allowed_blocks, $post ) {
+	$allowed = is_array($allowed_blocks) ? $allowed_blocks : array();
+	array_push($allowed, 'planet4-japan/block-donation-widget');
+	return $allowed;
+}
+
+add_filter('allowed_block_types', 'p4_child_theme_gpjp_whitelist_blocks', 11, 2);
