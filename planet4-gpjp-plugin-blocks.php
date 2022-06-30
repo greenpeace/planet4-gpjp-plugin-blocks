@@ -21,7 +21,7 @@
  * @see https://developer.wordpress.org/reference/functions/register_block_type/
  */
 function planet4_gpjp_plugin_blocks() {
-	register_block_type( __DIR__ . '/build/block-donation-widget' );
+	register_block_type( __DIR__ . '/build/cta-widgets' );
 	/* register_block_type( __DIR__ . '/build/{{another-plugin}}' ); */
 }
 
@@ -29,7 +29,7 @@ add_action( 'init', 'planet4_gpjp_plugin_blocks' );
 
 function p4_child_theme_gpjp_whitelist_blocks( $allowed_blocks, $post ) {
 	$allowed = is_array($allowed_blocks) ? $allowed_blocks : array();
-	array_push($allowed, 'planet4-japan/block-donation-widget');
+	array_push($allowed, 'planet4-japan/cta-widgets');
 	return $allowed;
 }
 
