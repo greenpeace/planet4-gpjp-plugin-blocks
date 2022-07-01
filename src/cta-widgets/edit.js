@@ -55,7 +55,7 @@ const WithId = (WrappedComponent) => (props) => {
 
 export default WithId(function Edit({ instanceId, attributes, setAttributes }) {
 
-  const blockProps = useBlockProps()
+  const blockProps = useBlockProps({className: 'p4jp-block-wrapper'})
 
   const handleOnChange = (attributeKey) => (value) => {
     setAttributes({ [attributeKey]: value })
@@ -76,7 +76,7 @@ export default WithId(function Edit({ instanceId, attributes, setAttributes }) {
   },[])
 
   return (
-    <div {...blockProps} className="p4-jp-block-wrapper">
+    <div {...blockProps}>
       <div>
         <strong>Block Type</strong>
       </div>
