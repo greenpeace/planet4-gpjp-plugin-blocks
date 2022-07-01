@@ -24,41 +24,66 @@ import { autop } from '@wordpress/autop'
  * @return {WPElement} Element to render.
  */
 export default function save({ attributes }) {
+  const {
+    blockId,
+    blockType,
+    title,
+    description,
+    image,
+    imageOverlayColor,
+    tabLabels,
+    tabPanels,
+    ctaBtns,
+  } = attributes
+
+  const cssVars = `
+    .p4jp-block-wrapper--${blockId}.p4jp-block-wrapper--donation {
+      --imageOverlayColor: ${imageOverlayColor};
+    }
+  `
+
   return (
     <div
       {...useBlockProps.save({
-        className: `p4jp-block-wrapper ${
-          attributes.blockType === 'donation'
+        className: `p4jp-block-wrapper p4jp-block-wrapper--${blockId} ${
+          blockType === 'donation'
             ? 'p4jp-block-wrapper--donation'
             : 'p4jp-block-wrapper--about'
         }`,
       })}
     >
-      {attributes.blockType === 'donation' && (
+      {blockType === 'donation' && (
         <>
+          <style>{cssVars}</style>
           <div className="fullwidth">
             <div className="fullwidth__left"></div>
             <div className="fullwidth__right"></div>
           </div>
           <div className="content">
             <div className="content__left info">
-              <div className="wrapper wrapper--title">
-                <h3 className="title">{attributes.title}</h3>
-              </div>
-              <div
-                className="wrapper wrapper--description"
-                dangerouslySetInnerHTML={{
-                  __html: autop(attributes.description),
-                }}
-              ></div>
-              <div className="wrapper wrapper--keyvisual">
-                <img className="keyvisual" src={attributes.image} />
-              </div>
+              {title && (
+                <div className="wrapper wrapper--title">
+                  <h3 className="title">{title}</h3>
+                </div>
+              )}
+              {description && (
+                <div
+                  className="wrapper wrapper--description"
+                  dangerouslySetInnerHTML={{
+                    __html: autop(description),
+                  }}
+                ></div>
+              )}
+              {image && (
+                <div className="wrapper wrapper--keyvisual">
+                  <img className="keyvisual" src={image} />
+                </div>
+              )}
             </div>
             <div className="content__right cta">
               <div className="tabs">
                 <div className="wrapper wrapper--tabs-label">
-                  {attributes.tabLabels.map(
+                  {tabLabels.map(
                     ({ value }, index) =>
                       value && (
                         <a
@@ -76,7 +101,7 @@ export default function save({ attributes }) {
                   )}
                 </div>
                 <div className="wrapper wrapper--tabs-panel">
-                  {attributes.tabPanels.map(
+                  {tabPanels.map(
                     ({ content, btnText, btnLink }, index) =>
                       content && (
                         <div
@@ -99,27 +124,33 @@ export default function save({ attributes }) {
           </div>
         </>
       )}
-      {attributes.blockType === 'about' && (
+      {blockType === 'about' && (
         <div className="content">
           <div className="content__top">
-            <div className="wrapper wrapper--title">
-              <h3 className="title">{attributes.title}</h3>
-            </div>
-            <div className="wrapper wrapper--keyvisual">
-              <div className="aspect-box">
-                <img className="keyvisual" src={attributes.image} />
+            {title && (
+              <div className="wrapper wrapper--title">
+                <h3 className="title">{title}</h3>
               </div>
-            </div>
+            )}
+            {image && (
+              <div className="wrapper wrapper--keyvisual">
+                <div className="aspect-box">
+                  <img className="keyvisual" src={image} />
+                </div>
+              </div>
+            )}
           </div>
           <div className="content__bottom">
-            <div
-              className="wrapper wrapper--description"
-              dangerouslySetInnerHTML={{
-                __html: autop(attributes.description),
-              }}
-            ></div>
+            {description && (
+              <div
+                className="wrapper wrapper--description"
+                dangerouslySetInnerHTML={{
+                  __html: autop(description),
+                }}
+              ></div>
+            )}
             <div className="cta">
-              {attributes.ctaBtns.map(
+              {ctaBtns.map(
                 ({ btnText, btnLink }, index) =>
                   btnText && (
                     <div className="cta-btn" key={index}>

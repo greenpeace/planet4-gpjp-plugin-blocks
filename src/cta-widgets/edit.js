@@ -12,7 +12,12 @@ import { __ } from '@wordpress/i18n'
  *
  * @see https://developer.wordpress.org/block-editor/packages/packages-block-editor/#useBlockProps
  */
-import { Button, TextControl, RadioControl } from '@wordpress/components'
+import {
+  Button,
+  TextControl,
+  RadioControl,
+  ColorPicker,
+} from '@wordpress/components'
 import {
   useBlockProps,
   PlainText,
@@ -20,8 +25,9 @@ import {
   MediaUploadCheck,
   URLInput,
 } from '@wordpress/block-editor'
-
-import { useState, useEffect } from '@wordpress/element'
+import { useInstanceId } from '@wordpress/compose'
+import { useEffect } from '@wordpress/element'
+import { addFilter } from '@wordpress/hooks'
 import { removep } from '@wordpress/autop'
 
 /**
@@ -40,8 +46,14 @@ import './editor.scss'
  *
  * @return {WPElement} Element to render.
  */
-export default function Edit({ attributes, setAttributes }) {
-  const [showDesc, setShowDesc] = useState(false)
+
+const WithId = (WrappedComponent) => (props) => {
+  const instanceId = useInstanceId(WrappedComponent)
+
+  return <WrappedComponent {...props} instanceId={instanceId} />
+}
+
+export default WithId(function Edit({ instanceId, attributes, setAttributes }) {
 
   const blockProps = useBlockProps()
 
@@ -59,17 +71,9 @@ export default function Edit({ attributes, setAttributes }) {
     setAttributes({ [attributeKey]: newValue })
   }
 
-  useEffect(() => {
-    if (attributes.description) {
-      setAttributes({ description: removep(attributes.description) })
-    }
-  }, [])
-
-  useEffect(() => {
-    if (!showDesc && !/^<p>/.test(attributes.description)) {
-      setShowDesc(true)
-    }
-  }, [showDesc, attributes.description])
+  useEffect(()=>{
+    setAttributes({blockId: instanceId})
+  },[])
 
   return (
     <div {...blockProps} className="p4-jp-block-wrapper">
@@ -102,7 +106,7 @@ export default function Edit({ attributes, setAttributes }) {
       <div>
         <PlainText
           onChange={handleOnChange('description')}
-          value={showDesc ? attributes.description : ''}
+          value={attributes.description}
         />
       </div>
       <div>
@@ -124,58 +128,76 @@ export default function Edit({ attributes, setAttributes }) {
           <img src={attributes.image} />
         </div>
       </div>
-      {attributes.blockType === 'donation' &&
-        attributes.tabLabels.map((tabLabel, index) => (
-          <React.Fragment key={index}>
-            <div>
-              <strong>Tab {index + 1}</strong>
-            </div>
-            <div className="tab-settings">
-              <div>Label</div>
+      {attributes.blockType === 'donation' && (
+        <>
+          <div>
+            <strong>Image Overlay Color</strong>
+          </div>
+          <div>
+            <ColorPicker
+              color={attributes.imageOverlayColor}
+              onChange={handleOnChange('imageOverlayColor')}
+              enableAlpha
+              defaultValue="rgba(0,0,0,0.5)"
+            />
+          </div>
+          {attributes.tabLabels.map((tabLabel, index) => (
+            <React.Fragment key={index}>
               <div>
-                <TextControl
-                  onChange={handleArrayItemChange('tabLabels', index, 'value')}
-                  value={tabLabel.value}
-                />
+                <strong>Tab {index + 1}</strong>
               </div>
-              <div>Content</div>
-              <div>
-                <PlainText
-                  onChange={handleArrayItemChange(
-                    'tabPanels',
-                    index,
-                    'content'
-                  )}
-                  value={attributes.tabPanels[index].content}
-                />
-              </div>
-              <div>Button Text</div>
-              <div>
-                <TextControl
-                  onChange={handleArrayItemChange(
-                    'tabPanels',
-                    index,
-                    'btnText'
-                  )}
-                  value={attributes.tabPanels[index].btnText}
-                />
-              </div>
-              <div>Button Link</div>
-              <div>
+              <div className="tab-settings">
+                <div>Label</div>
                 <div>
-                  <URLInput
+                  <TextControl
+                    onChange={handleArrayItemChange(
+                      'tabLabels',
+                      index,
+                      'value'
+                    )}
+                    value={tabLabel.value}
+                  />
+                </div>
+                <div>Content</div>
+                <div>
+                  <PlainText
                     onChange={handleArrayItemChange(
                       'tabPanels',
                       index,
-                      'btnLink'
+                      'content'
                     )}
-                    value={attributes.tabPanels[index].btnLink}
+                    value={attributes.tabPanels[index].content}
                   />
                 </div>
+                <div>Button Text</div>
+                <div>
+                  <TextControl
+                    onChange={handleArrayItemChange(
+                      'tabPanels',
+                      index,
+                      'btnText'
+                    )}
+                    value={attributes.tabPanels[index].btnText}
+                  />
+                </div>
+                <div>Button Link</div>
+                <div>
+                  <div>
+                    <URLInput
+                      onChange={handleArrayItemChange(
+                        'tabPanels',
+                        index,
+                        'btnLink'
+                      )}
+                      value={attributes.tabPanels[index].btnLink}
+                    />
+                  </div>
+                </div>
               </div>
-            </div>
-          </React.Fragment>
-        ))}
+            </React.Fragment>
+          ))}
+        </>
+      )}
       {attributes.blockType === 'about' &&
         attributes.ctaBtns.map((ctaBtn, index) => (
           <React.Fragment key={index}>
@@ -208,4 +230,19 @@ export default function Edit({ attributes, setAttributes }) {
         ))}
     </div>
   )
+})
+
+function sanitizeBlockAttributes(blockAttr, blockConfig) {
+  if (blockConfig.name === 'planet4-japan/cta-widgets') {
+    if (blockAttr.description) {
+      blockAttr.description = removep(blockAttr.description)
+    }
+  }
+  return blockAttr
 }
+
+addFilter(
+  'blocks.getBlockAttributes',
+  'planet4-japan/cta-widgets',
+  sanitizeBlockAttributes
+)
