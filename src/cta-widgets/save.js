@@ -66,6 +66,13 @@ export default function save({ attributes }) {
                   <h3 className="title">{title}</h3>
                 </div>
               )}
+              {image && (
+                <div className="wrapper wrapper--keyvisual">
+                  <img className="keyvisual" src={image} />
+                </div>
+              )}
+            </div>
+            <div className="content__right cta">
               {description && (
                 <div
                   className="wrapper wrapper--description"
@@ -74,13 +81,6 @@ export default function save({ attributes }) {
                   }}
                 ></div>
               )}
-              {image && (
-                <div className="wrapper wrapper--keyvisual">
-                  <img className="keyvisual" src={image} />
-                </div>
-              )}
-            </div>
-            <div className="content__right cta">
               <div className="tabs">
                 <div className="wrapper wrapper--tabs-label">
                   {tabLabels.map(
