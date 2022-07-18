@@ -56,7 +56,13 @@ export default function save({ attributes }) {
         <>
           <style>{cssVars}</style>
           <div className="fullwidth">
-            <div className="fullwidth__left"></div>
+            <div className="fullwidth__left">
+              {image && (
+                <div className="wrapper wrapper--keyvisual">
+                  <img className="keyvisual" src={image} />
+                </div>
+              )}
+            </div>
             <div className="fullwidth__right"></div>
           </div>
           <div className="content">
@@ -64,11 +70,6 @@ export default function save({ attributes }) {
               {title && (
                 <div className="wrapper wrapper--title">
                   <h3 className="title">{title}</h3>
-                </div>
-              )}
-              {image && (
-                <div className="wrapper wrapper--keyvisual">
-                  <img className="keyvisual" src={image} />
                 </div>
               )}
             </div>
