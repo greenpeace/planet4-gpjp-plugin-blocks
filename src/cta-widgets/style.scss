@@ -35,10 +35,6 @@ $sm: 991px;
       width: 100vw;
       height: 100%;
 
-      @media (max-width: $sm) {
-        display: none;
-      }
-
       &__left,
       &__right {
         position: absolute;
@@ -55,6 +51,20 @@ $sm: 991px;
       &__right {
         right: 0;
         background-color: #dfebf0;
+      }
+
+      @media (max-width: $sm) {
+        padding: 0 calc((100vw - 100%) / 2);
+        &__left {
+          width: 100%;
+          height: 0px;
+          padding-bottom: 63.08%;
+          position: relative;
+        }
+
+        &__right {
+          display: none;
+        }
       }
     }
 
@@ -109,7 +119,7 @@ $sm: 991px;
       &__left {
         padding: 32px 0;
         @media (max-width: $sm) {
-          padding: 24px;
+          padding: 0;
           height: 0;
           padding-bottom: 63.08%;
         }
@@ -141,6 +151,7 @@ $sm: 991px;
 
         @media (max-width: $sm) {
           font-size: 24px;
+          margin: 32px 0 0 32px;
         }
       }
 
